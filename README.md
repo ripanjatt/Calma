@@ -8,6 +8,7 @@ Download the apk from app/release.
 Waveform Progressbar: https://github.com/alexei-frolo/WaveformSeekBar
 
 # Screenshots
-
-![](screenshots/01.jpeg)
-![](screenshots/02.jpeg)
+01
+<img src='screenshots/01.jpeg'/>
+02
+<img src='screenshots/02.jpeg'/>
