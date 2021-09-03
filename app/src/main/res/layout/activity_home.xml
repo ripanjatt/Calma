@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="audio"
+            type="com.ripanjatt.calma.util.Audio" />
+        <variable
+            name="progress"
+            type="Integer" />
+        <variable
+            name="isShuffle"
+            type="Boolean" />
+        <variable
+            name="isRepeat"
+            type="Boolean" />
+        <variable
+            name="isFav"
+            type="Boolean" />
+        <variable
+            name="isPlaying"
+            type="Boolean" />
+        <variable
+            name="playListName"
+            type="String" />
+        <variable
+            name="size"
+            type="String" />
+        <variable
+            name="contentUri"
+            type="String" />
+        <variable
+            name="albumID"
+            type="Long" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grad_background"
+        android:focusable="auto"
+        android:focusableInTouchMode="true"
+        tools:context=".activities.Home">
+
+        <include
+            android:id="@+id/home"
+            layout="@layout/home_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            bind:currentAudio="@{audio}"
+            bind:isPlaying="@{isPlaying}"
+            bind:progress="@{progress}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/expanded"
+            layout="@layout/expanded"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            bind:currentAudio="@{audio}"
+            bind:isShuffle="@{isShuffle}"
+            bind:isRepeat="@{isRepeat}"
+            bind:isFav="@{isFav}"
+            bind:isPlaying="@{isPlaying}"
+            bind:progress="@{progress}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/playListPopUp"
+            layout="@layout/playlist_popup"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            bind:playListName="@{playListName}"
+            bind:size="@{size}"
+            bind:uri="@{contentUri}"
+            bind:id="@{albumID}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

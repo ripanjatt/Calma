@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.ripanjatt.calma.util.Util"/>
+        <variable
+            name="currentAudio"
+            type="com.ripanjatt.calma.util.Audio" />
+        <variable
+            name="isShuffle"
+            type="Boolean" />
+        <variable
+            name="isRepeat"
+            type="Boolean" />
+        <variable
+            name="isFav"
+            type="Boolean" />
+        <variable
+            name="isPlaying"
+            type="Boolean" />
+        <variable
+            name="progress"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_custom">
+
+        <ImageView
+            android:id="@+id/expandedArt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.5"
+            android:foreground="@color/black_custom"
+            android:scaleType="centerCrop"
+            contentUri="@{currentAudio.uri}"
+            albumID="@{currentAudio.albumID}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/music_icon" />
+
+        <ImageButton
+            android:id="@+id/expandedExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:padding="8dp"
+            android:text="Now Playing"
+            android:textColor="@color/baby_blue"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0">
+
+            <ImageButton
+                android:id="@+id/expandedShuffle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_back"
+                android:onClick="menu"
+                android:padding="8dp"
+                android:setDrawableShuffle="@{isShuffle}"
+                app:srcCompat="@drawable/ic_baseline_shuffle_24" />
+
+            <ImageButton
+                android:id="@+id/expandedRepeat"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_back"
+                android:onClick="menu"
+                android:padding="8dp"
+                android:setDrawableRepeat="@{isRepeat}"
+                app:srcCompat="@drawable/ic_baseline_repeat_one_24" />
+
+            <ImageButton
+                android:id="@+id/expandedFav"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_back"
+                android:onClick="menu"
+                android:padding="8dp"
+                android:setDrawableFav="@{isFav}"
+                app:srcCompat="@drawable/ic_baseline_favorite_24" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/expandedTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:singleLine="true"
+            android:text="@{currentAudio.name}"
+            android:textAlignment="center"
+            android:textColor="@color/baby_blue"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <TextView
+            android:id="@+id/expandedArtist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="48dp"
+            android:alpha="0.6"
+            android:singleLine="true"
+            android:text="@{currentAudio.artist}"
+            android:textAlignment="center"
+            android:textColor="@color/baby_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expandedTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expandedArtist"
+            app:layout_constraintVertical_bias="0.0">
+
+            <ImageButton
+                android:id="@+id/expandedPrev"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_margin="12dp"
+                android:background="@drawable/button_back"
+                android:onClick="menu"
+                android:padding="8dp"
+                app:srcCompat="@drawable/ic_baseline_skip_previous_32" />
+
+            <ImageButton
+                android:id="@+id/expandedPlay"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_margin="12dp"
+                android:background="@drawable/play_button_back"
+                android:onClick="menu"
+                android:padding="8dp"
+                android:setDrawablePlayExp="@{isPlaying}"
+                app:srcCompat="@drawable/ic_baseline_play_arrow_48"
+                app:tint="@color/black_custom" />
+
+            <ImageButton
+                android:id="@+id/expandedNext"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_margin="12dp"
+                android:background="@drawable/button_back"
+                android:onClick="menu"
+                android:padding="8dp"
+                app:srcCompat="@drawable/ic_baseline_skip_next_32" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@color/black_translucent_40"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/expandedElapsed"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:setDuration="@{progress}"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textColor="@color/baby_blue"
+                android:textSize="12sp" />
+
+
+            <com.frolo.waveformseekbar.WaveformSeekBar
+                android:id="@+id/expandedSeek"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                app:waveBackgroundColor="@color/baby_blue"
+                app:waveProgressColor="@color/skin" />
+
+
+            <TextView
+                android:id="@+id/expandedTotal"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:setDuration="@{currentAudio.duration}"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textColor="@color/baby_blue"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
