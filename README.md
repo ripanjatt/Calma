@@ -6,3 +6,7 @@ A fully functional music app for android devices to play offline music available
 Download the apk from app/release.
 
 Waveform Progressbar: https://github.com/alexei-frolo/WaveformSeekBar
+
+# Screenshots
+<img src='screenshots/01.jpeg' width=480/>
+<img src='screenshots/02.jpeg' width=480/>
