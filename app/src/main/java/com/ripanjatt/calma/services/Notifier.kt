@@ -35,8 +35,7 @@ object Notifier {
                 context,
             0,
             Intent(context, Home::class.java)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+                .setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
             PendingIntent.FLAG_CANCEL_CURRENT
         ))
         val manager = NotificationManagerCompat.from(context)

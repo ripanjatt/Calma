@@ -49,14 +49,10 @@ class Home : AppCompatActivity() {
             thread {
                 audioList.clear()
                 audioList.addAll(Repository.getAudio())
-                currentList.apply {
-                    clear()
-                    addAll(audioList)
-                }
-                favList.apply {
-                    clear()
-                    addAll(Repository.getFav(this@Home))
-                }
+                currentList.clear()
+                currentList.addAll(audioList)
+                favList.clear()
+                favList.addAll(Repository.getFav(this@Home))
                 CoroutineScope(Main).launch {
                     setUpTabs()
                     SearchListener.setSearchListener(binding.home.searchInput, audioList, searchList, binding.home.searchRecycler, this@Home)
@@ -369,31 +365,6 @@ class Home : AppCompatActivity() {
                         super.onBackPressed()
                     }
                 }.show()
-            }
-        }
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Repository.loadFiles(this)
-        thread {
-            audioList.apply {
-                clear()
-                addAll(Repository.getAudio())
-            }
-            currentList.apply {
-                clear()
-                addAll(audioList)
-            }
-            currentItem = Data.getCurrent(this)
-            binding.audio = currentItem
-            favList.apply {
-                clear()
-                addAll(Repository.getFav(this@Home))
-            }
-            CoroutineScope(Main).launch {
-                setUpTabs()
-                SearchListener.setSearchListener(binding.home.searchInput, audioList, searchList, binding.home.searchRecycler, this@Home)
             }
         }
     }

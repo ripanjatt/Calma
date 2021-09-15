@@ -5,13 +5,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentUris
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import android.util.Size
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -31,8 +29,12 @@ object Util {
     fun getBitmap(context: Context, uri: Uri, albumID: Long): Bitmap {
         var bitmap = BitmapFactory.decodeResource(context.resources, R.mipmap.music_icon)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            bitmap = context.contentResolver.loadThumbnail(
-                uri, Size(512, 512), null)
+            bitmap = try {
+                context.contentResolver.loadThumbnail(
+                    uri, Size(512, 512), null)
+            } catch(e: Exception) {
+                BitmapFactory.decodeResource(context.resources, R.mipmap.music_icon)
+            }
         } else {
             try {
                 val artUri = ContentUris.withAppendedId(
